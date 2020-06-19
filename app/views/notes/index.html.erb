@@ -1,0 +1,15 @@
+<h1>My travel journal 🚀</h1>
+
+<%= render :template => "notes/new" %>
+
+<ul>
+  <% @notes.each do |note| %>
+    <li><%= link_to note.city, note_path(note)%>
+    <%=note.message%>
+    </li>
+    
+  <% end %>
+</ul>
+
+
+
