@@ -14,7 +14,6 @@ ActiveRecord::Schema.define(version: 2020_06_19_153852) do
 
   create_table "notes", force: :cascade do |t|
     t.string "city"
-    t.date "date"
     t.text "message"
     t.string "weather"
     t.datetime "created_at", precision: 6, null: false
