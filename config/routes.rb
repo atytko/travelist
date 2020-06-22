@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
+  root to: "pages#login"
   get "notes", to: "notes#index"
   get "notes/new", to: "notes#new", as: :new_note
   post "notes", to: "notes#create"
