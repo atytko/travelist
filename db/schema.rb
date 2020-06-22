@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2020_06_22_145550) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "notes", force: :cascade do |t|
     t.string "city"
     t.text "message"
