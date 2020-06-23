@@ -8,4 +8,10 @@ Rails.application.routes.draw do
   get "notes/:id/edit", to: "notes#edit", as: :edit_note
   patch "notes/:id", to: "notes#update"
   delete "notes/:id", to: "notes#destroy"
+
+  devise_scope :user do
+    delete "/users/sign_out" => "devise/sessions#destroy"
+  end
+
 end
+

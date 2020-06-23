@@ -7,14 +7,13 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <%= link_to "Home", "#", class: "nav-link" %>
-      </li>
       <li class="nav-item">
         <%= link_to "Contact", "https://www.linkedin.com/in/annatytko/", class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Sign Out", users_sign_out_path, method: :delete, class: "nav-link" %>
       </li>
     </ul>
   </div>
