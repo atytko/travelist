@@ -1,9 +1,7 @@
 class PagesController < ApplicationController
-    skip_before_action :authenticate_user!, only: :login
- 
-    def login
-        if(user_signed_in?)
-            redirect_to notes_path
-        end
-    end
+  skip_before_action :authenticate_user!, only: :login
+
+  def login
+    redirect_to notes_path if user_signed_in?
+  end
 end

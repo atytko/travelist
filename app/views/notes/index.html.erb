@@ -2,14 +2,15 @@
     <div class="container">
       <h2 class="display-5 my-4">My travel journal </h2>
 
-<%= render :template => "notes/new" %>
+      <%= render :template => "notes/new" %>
     </div>
 </div>
+
+
 <div class="container">
    <h2 class="text-center display-5 my-4">Older posts </h2>
-
-  <%= @getCurrentCityTemp %>
-
+  
+  <%= @get_current_city_temp %>
   <% @notes.reverse.each do |note| %>
     <div class="card my-3">
       <div class="card-header d-flex justify-content-between">

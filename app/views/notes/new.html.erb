@@ -1,4 +1,17 @@
-      <%= form_for(@note) do |f| %>
+      
+      <%= form_with(model: [@note], local: true) do |f| %>
+
+
+      <% if flash[:success] %>
+        <div class="alert alert-info"><%= flash[:success] %></div>
+      <% end %>
+      <% if flash[:error] %>
+        <% flash[:errors_list].each do |message| %>
+          <div class="alert alert-danger"><%= message[1][0] %></div>
+        <% end %>
+      <% end %>
+
+
         <div class="form-group">
             <%= f.label :city, 'City' %>
             <%= f.text_field :city, :required => true, :class => 'form-control' %>
@@ -9,8 +22,3 @@
         </div>        
         <%= f.submit 'Create a post', :class => 'btn btn-ghost'  %>
       <% end %>
-    </div>
-  </div>
-
-
-

@@ -1,12 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Note, type: :model do
-  
   context 'validation tests' do
     it 'ensures city presence' do
       note = Note.new(city: nil).save
       expect(note).to eq(false)
-    end 
+    end
 
     it 'ensures message presence' do
       note = Note.new(message: nil).save
@@ -18,9 +17,8 @@ RSpec.describe Note, type: :model do
       expect(note).to eq(true)
     end
   end
-  
   context 'scope tests' do
-    let (:params) { {message: 'Nice trip.'} }
+    let(:params) { { message: 'Nice trip.' } }
     before(:each) do
       Note.new(params.merge(city: 'Lisbon')).save
       Note.new(params.merge(city: 'Tokyo')).save

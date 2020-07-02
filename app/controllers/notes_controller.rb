@@ -1,61 +1,54 @@
 class NotesController < ApplicationController
-    def index
-        @note = Note.new
-        @notes = Note.all
+  def index
+    @note = Note.new
+    @notes = Note.all
+  end
+
+  def show
+    @note = Note.find(params[:id])
+  end
+
+  def new
+    @note = Note.new
+  end
+
+  def create
+    require 'net/http'
+    require 'json'
+
+    @note = Note.new(note_params)
+    temperature = TemperaturesController.new 
+    @note.weather = temperature.get_temperature(@note.city)
+    if @note.save
+      flash[:success] = 'Note created'
+    else
+      flash[:error_label] = 'ERROR: Note was not created'
+      flash[:error] = @note.errors.any?
+      flash[:errors_list] = @note.errors.messages
     end
 
-    def show
-        @note = Note.find(params[:id])
-    end
+    redirect_to notes_path
+  end
 
-    def new
-        @note = Note.new 
-    end
+  def edit
+    @note = Note.find(params[:id])
+  end
 
-    def create
-        require 'net/http'
-        require 'json'
+  def update
+    @note = Note.find(params[:id])
+    @note.update(note_params)
+    redirect_to notes_path
+  end
 
-        @note = Note.new(note_params)
-        
-        @url = 'https://api.openweathermap.org/data/2.5/weather?q=' + @note.city + '&units=metric&appid=4f416da763a05965e2e042b8d89c100c'
-        begin
-            @uri = URI.parse(@url)
-        rescue URI::InvalidURIError
-            @uri = URI.parse(URI.escape(@url))
-        end
-        @response = Net::HTTP.get(@uri)
-        @getCurrentCityWeather = JSON.parse(@response)
+  def destroy
+    @note = Note.find(params[:id])
+    @note.destroy
+    redirect_to notes_path
+  end
 
-        if(@getCurrentCityWeather["cod"] == 200)
-            @getCurrentCityTemp = @getCurrentCityWeather["main"]["temp"]
-            @note.weather = @getCurrentCityTemp.round(1)
-        end
+  private
 
-        @note.save
-        redirect_to notes_path
-    end
-
-    def edit
-        @note = Note.find(params[:id])
-    end
-
-    def update
-        @note = Note.find(params[:id])
-        @note.update(note_params)
-        redirect_to notes_path
-    end
-
-    def destroy
-        @note = Note.find(params[:id])
-        @note.destroy
-        redirect_to notes_path
-    end
-
-    private
-
-    def note_params
-        params.require(:note).permit(:city, :message, :created_at)
-    end
-
+  def note_params
+    params.require(:note).permit(:city, :message, :created_at)
+  end
 end
