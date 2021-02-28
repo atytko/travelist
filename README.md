@@ -16,7 +16,7 @@ https://my-travelist.herokuapp.com/
     - Before you start, you need to generate your own keys
     - Visit Google Cloud Platform (https://console.cloud.google.com/apis/credentials)
     - Create an APP and generate the keys (GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET)
-    - Create .env file and set this two variables with your keys
+    - Create .env file and set these two variables with your keys
 
 ## Install
 
