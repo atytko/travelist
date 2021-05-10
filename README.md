@@ -23,7 +23,7 @@ https://my-travelist.herokuapp.com/
 
     $ bundle install
 
-    $ rails db:migrate
+    $ rails db:setup
 
 ## Tests
 
